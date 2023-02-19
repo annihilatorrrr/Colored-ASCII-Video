@@ -76,8 +76,7 @@ def grayscale(rgb):
     r = int(rgb[0])
     g = int(rgb[1])
     b = int(rgb[2])
-    brightness = (r + g + b) / 3
-    return brightness
+    return (r + g + b) / 3
 
 def print_frame(img, frame_time):
     player.set_pause(False)
@@ -122,7 +121,7 @@ def print_frame(img, frame_time):
         size_difference = term_width - small_width
 
         if size_difference > 1:
-            for i in range(int(size_difference/2 + 1)):
+            for _ in range(int(size_difference/2 + 1)):
                 ascii += " "
 
         for row in col:
@@ -133,9 +132,7 @@ def print_frame(img, frame_time):
 
     print(ascii[:-1], end="")
     while True:
-        if time.time() - current_time <= frame_time:
-            pass
-        else:
+        if time.time() - current_time > frame_time:
             sys.stdout.write(f"\033[{small_height + 1}F") # Cursor up n lines
             player.set_pause(True)
             break
